@@ -1,0 +1,46 @@
+[
+  {
+    "dataset": "PIMA Indians Diabetes Database",
+    "source": "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
+    "method": "urllib.request.urlretrieve",
+    "filepath": "..\\data\\raw\\pima_diabetes.csv",
+    "rows": 768,
+    "columns": 9,
+    "size_kb": 23.5,
+    "md5": "f8183aa843a1f37607d7bc1131626f1b",
+    "timestamp": "2026-03-12 15:25:37"
+  },
+  {
+    "dataset": "UCI Heart Disease Dataset (Cleveland)",
+    "source": "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+    "method": "urllib.request.urlretrieve",
+    "filepath": "..\\data\\raw\\uci_heart_disease.csv",
+    "rows": 303,
+    "columns": 14,
+    "size_kb": 18.4,
+    "md5": "14a72a60283bdb7de5ac7bd12ee26a5e",
+    "timestamp": "2026-03-12 15:25:39"
+  },
+  {
+    "dataset": "Framingham Heart Study Dataset",
+    "source": "https://raw.githubusercontent.com/GauravPadawe/Framingham-Heart-Study/master/framingham.csv",
+    "method": "urllib.request.urlretrieve",
+    "filepath": "..\\data\\raw\\framingham.csv",
+    "rows": 4240,
+    "columns": 16,
+    "size_kb": 187.31,
+    "md5": "7022cf016eefb6d3747447589423dab0",
+    "timestamp": "2026-03-12 15:30:28"
+  },
+  {
+    "dataset": "Framingham Heart Study Dataset",
+    "source": "https://raw.githubusercontent.com/GauravPadawe/Framingham-Heart-Study/master/framingham.csv",
+    "method": "urllib.request.urlretrieve",
+    "filepath": "..\\data\\raw\\framingham.csv",
+    "rows": 4240,
+    "columns": 16,
+    "size_kb": 187.31,
+    "md5": "7022cf016eefb6d3747447589423dab0",
+    "timestamp": "2026-03-12 15:31:06"
+  }
+]
