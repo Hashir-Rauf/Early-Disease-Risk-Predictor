@@ -1,0 +1,61 @@
+{
+  "random_state": 42,
+  "test_size": 0.2,
+  "cv_folds": 5,
+  "scale_pos_weight": {
+    "diabetes": 18.8,
+    "heart_disease": 5.8,
+    "hypertension": 1.64
+  },
+  "lr_params": {
+    "class_weight": "balanced",
+    "max_iter": 1000,
+    "solver": "lbfgs",
+    "C": 1.0,
+    "random_state": 42
+  },
+  "rf_params": {
+    "n_estimators": 300,
+    "max_depth": 10,
+    "min_samples_leaf": 5,
+    "max_features": "sqrt",
+    "class_weight": "balanced",
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "xgb_base_params": {
+    "objective": "binary:logistic",
+    "eval_metric": "logloss",
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "gamma": 0.1,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "mlp_params": {
+    "hidden_layer_sizes": [
+      128,
+      64
+    ],
+    "activation": "relu",
+    "solver": "adam",
+    "alpha": 0.001,
+    "batch_size": 64,
+    "learning_rate": "adaptive",
+    "learning_rate_init": 0.001,
+    "max_iter": 500,
+    "early_stopping": true,
+    "validation_fraction": 0.1,
+    "n_iter_no_change": 20,
+    "random_state": 42
+  },
+  "xgb_search_n_iter": 40,
+  "mlp_search_n_iter": 16,
+  "search_scoring": "roc_auc"
+}
