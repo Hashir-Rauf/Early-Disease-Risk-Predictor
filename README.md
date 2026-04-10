@@ -75,16 +75,17 @@ Early-Disease-Risk-Predictor/
 |   |   +-- 02_cleaning.ipynb
 |   |   +-- 03_eda.ipynb
 |   |   +-- 04_feature_engineering.ipynb
-|   |   +-- 05_model_training.ipynb    # (upcoming)
-|   |   +-- 06_evaluation.ipynb        # (upcoming)
+|   |   +-- 05_model_architecture.ipynb
+|   |   +-- 06_model_training.ipynb
 |   |   +-- 07_xai_dashboard.ipynb     # (upcoming)
 |   |
 |   +-- data/
 |   |   +-- raw/                       # Downloaded source datasets
 |   |   +-- processed/                 # Cleaned, merged, scaled outputs
+|   |   +-- models/                    # Trained model weights (see note below)
 |   |
 |   +-- reports/
-|       +-- figures/                   # EDA and feature engineering plots
+|       +-- figures/                   # EDA, feature engineering, evaluation plots
 |
 +-- .gitignore
 +-- README.md
@@ -102,9 +103,18 @@ Early-Disease-Risk-Predictor/
 | `03_eda.ipynb` | Distributions, correlations, class balance, pairplot | Done |
 | `04_feature_engineering.ipynb` | Log transform, encoding, scaling, per-disease X/y export | Done |
 | `05_model_architecture.ipynb` | Framework selection, model configs, hyperparameter tables | Done |
-| `06_model_training.ipynb` | XGBoost + MLP training, RandomizedSearchCV | Upcoming |
-| `07_evaluation.ipynb` | Metrics, ROC curves, cross-validation | Upcoming |
-| `08_xai_dashboard.ipynb` | Interactive SHAP explainability interface | Upcoming |
+| `06_model_training.ipynb` | Training, RandomizedSearchCV, metrics, error analysis, bias check | Done |
+| `07_xai_dashboard.ipynb` | Interactive SHAP explainability interface | Upcoming |
+
+---
+
+## Model Weights
+
+Trained model files (`Scripts/data/models/*.pkl`) are **not committed to this repository** because serialised sklearn/XGBoost objects can grow large and Git is not suited for binary blobs.
+
+Re-generate them locally by running notebooks `05` and `06` in order, or download the pre-trained weights from the link below:
+
+> **Download:** *(add Google Drive / Hugging Face link here once weights are exported)*
 
 ---
 

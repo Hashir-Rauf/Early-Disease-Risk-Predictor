@@ -2,8 +2,10 @@
 data/raw/
 data/processed/
 
-# Model files
+# Model files — trained weights (pkl can be large; share via Google Drive / Hugging Face)
 models/
+Scripts/data/models/
+*.pkl
 
 # Jupyter checkpoints
 .ipynb_checkpoints/

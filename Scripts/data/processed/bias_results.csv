@@ -1,0 +1,22 @@
+Disease,Group type,Subgroup,n,n_pos,AUC-ROC,Recall,Precision,F1
+Diabetes,Age,Young (<40),203,26,0.911,0.808,0.356,0.494
+Diabetes,Age,Middle (40-55),385,11,0.998,1.0,0.733,0.846
+Diabetes,Age,Older (>55),209,3,0.997,1.0,0.333,0.5
+Diabetes,BMI,Overweight (25-30),362,5,0.982,0.8,0.211,0.333
+Diabetes,BMI,Obese (>30),143,34,0.929,0.912,0.5,0.646
+Diabetes,Source,pima,120,40,0.82,0.875,0.422,0.569
+Heart Disease,Age,Young (<40),198,5,0.961,0.4,0.667,0.5
+Heart Disease,Age,Middle (40-55),411,56,0.625,0.393,0.188,0.254
+Heart Disease,Age,Older (>55),188,56,0.626,0.946,0.317,0.475
+Heart Disease,BMI,Normal (<25),296,33,0.714,0.394,0.21,0.274
+Heart Disease,BMI,Overweight (25-30),333,67,0.723,0.791,0.303,0.438
+Heart Disease,BMI,Obese (>30),168,17,0.819,0.647,0.22,0.328
+Heart Disease,Source,framingham,631,97,0.696,0.598,0.241,0.343
+Heart Disease,Source,uci_heart,50,20,0.515,0.95,0.413,0.576
+Hypertension,Age,Young (<40),192,23,1.0,1.0,1.0,1.0
+Hypertension,Age,Middle (40-55),416,167,1.0,1.0,1.0,1.0
+Hypertension,Age,Older (>55),189,112,1.0,1.0,1.0,1.0
+Hypertension,BMI,Normal (<25),309,99,1.0,1.0,1.0,1.0
+Hypertension,BMI,Overweight (25-30),343,147,1.0,1.0,1.0,1.0
+Hypertension,BMI,Obese (>30),145,56,1.0,1.0,1.0,1.0
+Hypertension,Source,framingham,629,302,1.0,1.0,1.0,1.0
