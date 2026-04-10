@@ -101,9 +101,10 @@ Early-Disease-Risk-Predictor/
 | `02_cleaning.ipynb` | Missing values, duplicates, outliers, integration | Done |
 | `03_eda.ipynb` | Distributions, correlations, class balance, pairplot | Done |
 | `04_feature_engineering.ipynb` | Log transform, encoding, scaling, per-disease X/y export | Done |
-| `05_model_training.ipynb` | XGBoost training per disease | Upcoming |
-| `06_evaluation.ipynb` | Metrics, ROC curves, cross-validation | Upcoming |
-| `07_xai_dashboard.ipynb` | Interactive SHAP explainability interface | Upcoming |
+| `05_model_architecture.ipynb` | Framework selection, model configs, hyperparameter tables | Done |
+| `06_model_training.ipynb` | XGBoost + MLP training, RandomizedSearchCV | Upcoming |
+| `07_evaluation.ipynb` | Metrics, ROC curves, cross-validation | Upcoming |
+| `08_xai_dashboard.ipynb` | Interactive SHAP explainability interface | Upcoming |
 
 ---
 
