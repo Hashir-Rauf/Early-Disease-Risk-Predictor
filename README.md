@@ -3,19 +3,34 @@
 An AI-powered, explainable health risk assessment system for early detection of chronic diseases, built with XGBoost, SHAP, and a multi-dataset clinical pipeline.
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)
-![Status](https://img.shields.io/badge/Status-In%20Progress-orange?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
 ![Track](https://img.shields.io/badge/Track-Type%20A%20Application%20Development-purple?style=flat-square)
+![HF Spaces](https://img.shields.io/badge/Deployed-Hugging%20Face%20Spaces-orange?style=flat-square&logo=huggingface)
+
+---
+
+## Live Demo
+
+| Link | Description |
+|---|---|
+| **[https://hrm05-early-disease-risk-predictor.hf.space](https://hrm05-early-disease-risk-predictor.hf.space)** | Live Gradio app (real-time inference) |
+| **[https://huggingface.co/spaces/hrm05/early-disease-risk-predictor](https://huggingface.co/spaces/hrm05/early-disease-risk-predictor)** | Hugging Face Space (source + logs) |
+
+Enter patient vitals, click **Predict Risk**, and receive instant risk scores for Diabetes, Heart Disease, and Hypertension with full SHAP waterfall explanations.
 
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Diseases Targeted](#diseases-targeted)
 - [Tech Stack](#tech-stack)
 - [Repository Structure](#repository-structure)
 - [Progress](#progress)
+- [Model Performance](#model-performance)
+- [Deployment](#deployment)
 - [Getting Started](#getting-started)
 - [Team](#team)
 
@@ -23,7 +38,7 @@ An AI-powered, explainable health risk assessment system for early detection of 
 
 ## Overview
 
-Chronic non-communicable diseases such as Type 2 Diabetes, Cardiovascular Disease, and Hypertension remain widely underdiagnosed until they reach advanced stages. This project builds an AI-powered risk assessment tool that takes a user's vitals, lab results, and lifestyle inputs and returns an interpretable risk score for one or more of these conditions.
+Chronic non-communicable diseases such as Type 2 Diabetes, Cardiovascular Disease, and Hypertension remain widely underdiagnosed until they reach advanced stages. This project builds an AI-powered risk assessment tool that takes a user's vitals and lab results and returns an interpretable risk score for all three conditions simultaneously.
 
 Explainability (XAI) is treated as a primary output, not an afterthought. The system surfaces SHAP-based feature contributions interactively so users understand not just their risk level but the specific factors driving it.
 
@@ -31,10 +46,12 @@ Explainability (XAI) is treated as a primary output, not an afterthought. The sy
 
 ## Features
 
-- Multi-disease risk scoring for diabetes, cardiovascular disease, and hypertension from a single input
-- Integration of three distinct clinical datasets (no single pre-cleaned CSV)
-- Interactive SHAP explainability as a primary UI component
-- Comorbidity-aware modelling to capture interactions between conditions
+- Multi-disease risk scoring for Diabetes, Heart Disease, and Hypertension from a single input
+- Integration of three distinct clinical datasets (PIMA, UCI Heart Disease, Framingham Heart Study)
+- Interactive SHAP waterfall explanations per disease per patient
+- XGBoost primary model tuned via RandomizedSearchCV with class-imbalance correction
+- Bias analysis across age, BMI, and dataset-source subgroups
+- Fully deployed Gradio frontend on Hugging Face Spaces
 
 ---
 
@@ -43,8 +60,8 @@ Explainability (XAI) is treated as a primary output, not an afterthought. The sy
 | Disease | Key Input Features |
 |---|---|
 | Type 2 Diabetes | Glucose, BMI, Insulin, Age, Blood Pressure |
-| Cardiovascular Disease | Cholesterol, BP, ECG results, Chest pain type |
-| Hypertension | Systolic BP, BMI, Glucose, Age |
+| Cardiovascular Disease | Cholesterol, Blood Pressure, Age |
+| Hypertension | Systolic BP, BMI, Age, Glucose |
 
 ---
 
@@ -54,11 +71,13 @@ Explainability (XAI) is treated as a primary output, not an afterthought. The sy
 |---|---|
 | Language | Python 3.10+ |
 | Environment | Jupyter Notebook (.ipynb) |
-| ML Models | XGBoost, scikit-learn |
-| Explainability | SHAP |
+| ML Models | XGBoost 3.0, scikit-learn 1.6 |
+| Explainability | SHAP 0.47 |
 | Data Processing | pandas, NumPy, SciPy |
 | Visualisation | matplotlib, seaborn |
 | Serialisation | joblib |
+| Frontend | Gradio 5 |
+| Deployment | Hugging Face Spaces |
 
 ---
 
@@ -66,6 +85,16 @@ Explainability (XAI) is treated as a primary output, not an afterthought. The sy
 
 ```
 Early-Disease-Risk-Predictor/
+|
++-- deployment/                        # Hugging Face Spaces deployment package
+|   +-- app.py                         # Gradio frontend + inference logic
+|   +-- requirements.txt               # Space dependencies
+|   +-- README.md                      # HF Spaces metadata card
+|   +-- models/                        # Serialised XGBoost models + scaler
+|       +-- xgb_diabetes.pkl
+|       +-- xgb_heart_disease.pkl
+|       +-- xgb_hypertension.pkl
+|       +-- standard_scaler.pkl
 |
 +-- Documents/                         # Technical report (LaTeX PDF)
 |
@@ -77,15 +106,15 @@ Early-Disease-Risk-Predictor/
 |   |   +-- 04_feature_engineering.ipynb
 |   |   +-- 05_model_architecture.ipynb
 |   |   +-- 06_model_training.ipynb
-|   |   +-- 07_xai_dashboard.ipynb     # (upcoming)
+|   |   +-- 07_xai_dashboard.ipynb
 |   |
 |   +-- data/
 |   |   +-- raw/                       # Downloaded source datasets
 |   |   +-- processed/                 # Cleaned, merged, scaled outputs
-|   |   +-- models/                    # Trained model weights (see note below)
+|   |   +-- models/                    # Trained model weights (.pkl)
 |   |
 |   +-- reports/
-|       +-- figures/                   # EDA, feature engineering, evaluation plots
+|       +-- figures/                   # EDA, feature engineering, evaluation, SHAP plots
 |
 +-- .gitignore
 +-- README.md
@@ -104,17 +133,47 @@ Early-Disease-Risk-Predictor/
 | `04_feature_engineering.ipynb` | Log transform, encoding, scaling, per-disease X/y export | Done |
 | `05_model_architecture.ipynb` | Framework selection, model configs, hyperparameter tables | Done |
 | `06_model_training.ipynb` | Training, RandomizedSearchCV, metrics, error analysis, bias check | Done |
-| `07_xai_dashboard.ipynb` | Interactive SHAP explainability interface | Upcoming |
+| `07_xai_dashboard.ipynb` | SHAP waterfall, beeswarm, force, decision, dependence plots + patient interface | Done |
+| **Deployment** | Gradio app live on Hugging Face Spaces | **Done** |
 
 ---
 
-## Model Weights
+## Model Performance
 
-Trained model files (`Scripts/data/models/*.pkl`) are **not committed to this repository** because serialised sklearn/XGBoost objects can grow large and Git is not suited for binary blobs.
+Test-set results for the primary model (XGBoost, tuned via RandomizedSearchCV):
 
-Re-generate them locally by running notebooks `05` and `06` in order, or download the pre-trained weights from the link below:
+| Disease | Accuracy | AUC-ROC | Precision | Recall | F1 |
+|---|---|---|---|---|---|
+| Diabetes | 0.934 | 0.981 | 0.422 | 0.875 | 0.569 |
+| Heart Disease | 0.686 | 0.758 | 0.268 | 0.658 | 0.381 |
+| Hypertension | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 
-> **Download:** *(add Google Drive / Hugging Face link here once weights are exported)*
+Recall is prioritised as the primary clinical metric (minimising missed diagnoses). Class imbalance is handled via `scale_pos_weight` per disease.
+
+---
+
+## Deployment
+
+The app is deployed on **Hugging Face Spaces** using **Gradio 5**.
+
+| Item | Detail |
+|---|---|
+| Live app | https://hrm05-early-disease-risk-predictor.hf.space |
+| HF Space | https://huggingface.co/spaces/hrm05/early-disease-risk-predictor |
+| Framework | Gradio 5 (`gr.Blocks`) |
+| Models served | XGBoost (diabetes, heart disease, hypertension) |
+| Model size | ~730 KB total |
+| Explainability | SHAP waterfall charts via XGBoost native `pred_contribs` |
+| Inputs | Age, BMI, Fasting Glucose, Systolic BP, Insulin, Cholesterol |
+| Outputs | Risk % per disease + SHAP waterfall per disease |
+
+### Running the app locally
+
+```bash
+cd deployment
+pip install -r requirements.txt
+python app.py
+```
 
 ---
 
